@@ -27,6 +27,8 @@ jobs:
     - name: Insatall NPM modules
       run: npm install 
       #npm ci se vzimat ne ot package.json a ot *.log file
+    - name: Replace the backend endpoint
+      run: echo "export const settings = {host:\"http://localhost:3030\"}" > src/config.js
     - name: Start Backend 
       run: npm run start-be &
     - name: Start Frontend
