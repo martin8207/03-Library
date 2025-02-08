@@ -18,12 +18,20 @@ jobs:
 
     steps:
     - name: Checkout the repository
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
     - name: Use Node.js v22
       uses: actions/setup-node@v4
       with:
         node-version: 22
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Insatall NPM modules
+      run: npm install 
+      #npm ci se vzimat ne ot package.json a ot *.log file
+    - name: Start Backend 
+      run: npm run start-be &
+    - name: Start Frontend
+      run: npm run start-fe &
+    - name: Install Playwright
+      run: npx playwright install
+    - name: Run UI tests
+      run: npm run tets:ui
